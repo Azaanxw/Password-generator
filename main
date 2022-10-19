@@ -1,0 +1,31 @@
+import string
+import random
+import pyperclip
+password_length = int(input("How many digits long do you want your password to be? (minimum 5 digits) "))
+if password_length < 5:
+    raise ValueError("password would be too easy to guess try 5 or more digits to ensure a strong password.")
+alphabets = list(string.ascii_letters)
+punctuation = list(string.punctuation)
+def random_item(list):
+    '''
+    returns a random item from the list 
+    '''
+    return list[random.randint(0,len(list)-1)]
+#copy to clipboard feature
+
+password = []
+for i in range(password_length):
+    passwords  = []
+    ran_alphabet = random_item(alphabets)
+    ran_num = random.randint(0,9)
+    ran_punctuation = random_item(punctuation)
+    ran_num = [random.randint(0,2)]
+    passwords.extend([ran_alphabet,ran_num,ran_punctuation])
+    password.append(passwords[random.randint(0,2)])
+password = list(password)
+password = [str(x) for x in password]
+random.shuffle(password)
+password  = ''.join(password)
+password = password.replace('[','').replace(']','')
+pyperclip.copy(password)
+print(f"Your password is: {password} and has been copied to clipboard!")
